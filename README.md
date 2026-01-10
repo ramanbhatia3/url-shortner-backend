@@ -1,17 +1,17 @@
 # URL Shortner Backend
 
-A simple and efficient **URL Shortener backend** built using **Node.js, Express, and MongoDB**.  
-This project allows users to generate short URLs, redirect them to original URLs, and track visit analytics.
+A simple **URL Shortener backend** built using **Node.js, Express, MongoDB, and EJS**.  
+It allows users to generate short URLs, redirect them to original URLs, and view basic analytics through a minimal UI.
 
 ---
 
 ## 🚀 Features
 
-- Generate short URLs for long links
+- Generate short URLs from long links
 - Redirect short URLs to original URLs
 - Track visit history with timestamps
-- RESTful API structure
-- MongoDB-based data persistence
+- Server-side rendered UI using EJS
+- Display all generated URLs in a table
 - Clean MVC-style folder structure
 
 ---
@@ -22,26 +22,25 @@ This project allows users to generate short URLs, redirect them to original URLs
 - Express.js
 - MongoDB
 - Mongoose
+- EJS
 - shortid / nanoid
 - Nodemon
 
 ---
 
-
 ## 📂 Project Structure
 
 ```bash
 url-shortner-backend/
-│
 ├── controllers/
 │   └── url.js
-│
 ├── models/
 │   └── url.js
-│
 ├── routes/
-│   └── url.js
-│
+│   ├── url.js
+│   └── staticRouter.js
+├── views/
+│   └── home.ejs
 ├── connect.js
 ├── index.js
 ├── package.json
