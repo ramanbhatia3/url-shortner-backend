@@ -4,15 +4,27 @@ const URL = require("../models/url")
 
 async function handleGenerateShortURL(req, res) {
     const body = req.body;
-    if (!body.url) return res.status(400).json({ err: "URL is required" })
-    // const shortID = nanoid(8)
-    const shortID = shortid()
-    await URL.create({
-        shortID: shortID,
-        redirectURL: body.url,
-        visitHistory: []
-    })
 
+    if (!body.url) return res.status(400).json({ err: "URL is required" })
+
+    const existingURL = await URL.findOne({ redirectURL: body.url });
+
+    let shortID;
+
+    if (existingURL) {
+        // Reuse existing shortID
+        shortID = existingURL.shortID;
+    } else {
+        // Create new short URL
+        shortID = shortid();
+        await URL.create({
+            shortID: shortID,
+            redirectURL: body.url,
+            visitHistory: []
+        });
+    }
+
+    // Fetch all URLs again for table
     const allURLs = await URL.find({});
 
     return res.render("home", { 
